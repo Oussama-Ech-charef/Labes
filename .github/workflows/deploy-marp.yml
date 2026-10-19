@@ -32,10 +32,78 @@ jobs:
         with:
           node-version: 20
 
-      - name: Convert Markdown to HTML
+      - name: Convert all Markdown presentations to HTML
+        shell: bash
         run: |
-          mkdir -p _site
-          npx --yes @marp-team/marp-cli@latest laravel/presentation-mvc.md --output _site/index.html
+          set -euo pipefail
+          mkdir -p _site/presentations
+
+          mapfile -t presentations < <(find . -type f -iname '*presentation*.md' \
+            -not -path './.git/*' \
+            -not -path './_site/*' | sort)
+
+          if [ "${#presentations[@]}" -eq 0 ]; then
+            echo "No Markdown presentations were found."
+            exit 1
+          fi
+
+          : > /tmp/marp-index.tsv
+
+          for file in "${presentations[@]}"; do
+            relative="${file#./}"
+            slug="${relative//\//__}"
+            slug="${slug%.md}.html"
+            slug="${slug// /-}"
+
+            npx --yes @marp-team/marp-cli@latest "$file" \
+              --output "_site/presentations/$slug"
+
+            printf '%s\t%s\n' "$relative" "presentations/$slug" >> /tmp/marp-index.tsv
+          done
+
+          node <<'NODE'
+          const fs = require('fs');
+
+          const escapeHtml = (value) => value.replace(/[&<>"']/g, (char) => ({
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#39;'
+          }[char]));
+
+          const rows = fs.readFileSync('/tmp/marp-index.tsv', 'utf8')
+            .trim()
+            .split(/\r?\n/)
+            .filter(Boolean)
+            .map((line) => {
+              const [name, href] = line.split('\t');
+              return `<li><a href="${escapeHtml(href)}">${escapeHtml(name)}</a></li>`;
+            })
+            .join('\n');
+
+          const html = `<!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Marp Presentations</title>
+            <style>
+              body { font-family: Arial, sans-serif; max-width: 900px; margin: 48px auto; padding: 0 24px; color: #172033; }
+              h1 { color: #155eef; }
+              li { margin: 14px 0; }
+              a { color: #155eef; font-size: 1.1rem; }
+            </style>
+          </head>
+          <body>
+            <h1>Marp Presentations</h1>
+            <p>Choose a presentation:</p>
+            <ul>${rows}</ul>
+          </body>
+          </html>`;
+
+          fs.writeFileSync('_site/index.html', html);
+          NODE
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
