@@ -35,7 +35,7 @@ jobs:
       - name: Convert Markdown to HTML
         run: |
           mkdir -p _site
-          npx --yes @marp-team/marp-cli@latest laravel/presentation-laravel.md --output _site/index.html
+          npx --yes @marp-team/marp-cli@latest laravel/presentation-mvc.md --output _site/index.html
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
