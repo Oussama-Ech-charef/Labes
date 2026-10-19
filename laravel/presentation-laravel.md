@@ -51,6 +51,16 @@ style: |
 
 ---
 
+## Plan
+
+1. Découvrir Laravel
+2. Comprendre son architecture MVC
+3. Identifier ses outils essentiels
+4. Voir un exemple avec les catégories
+5. Comprendre Blade, les usages et les avantages
+
+---
+
 ## 1. Laravel, c'est quoi ?
 
 - **Framework Web PHP**.

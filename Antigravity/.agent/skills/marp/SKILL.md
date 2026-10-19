@@ -42,10 +42,11 @@ Follow this sequence for every presentation task:
 
 1. Identify the audience, learning objectives, requested language, and presentation length.
 2. Follow the user's example structure first. If there is no structure, use: definition, architecture or core concepts, tools, one concrete example, benefits and use cases, recap, and sources when appropriate.
-3. Keep one clear message per slide and prefer short bullets over paragraphs.
-4. Keep code examples short, syntactically coherent, and relevant to the subject. For Laravel, show the relationship between route, controller, model, database, and Blade view when that is part of the requested topic.
-5. Use official documentation for technical claims. Do not invent framework behavior or present version-specific details without checking the relevant version.
-6. Keep the requested language consistent; preserve API names, commands, class names, and code syntax.
+3. For educational decks, include a short **Plan** or **Sommaire** slide immediately after the title unless the user explicitly asks for a shorter deck or the reference example omits it. Keep it to 4–7 items and synchronize it with the actual slide order.
+4. Keep one clear message per slide and prefer short bullets over paragraphs.
+5. Keep code examples short, syntactically coherent, and relevant to the subject. For Laravel, show the relationship between route, controller, model, database, and Blade view when that is part of the requested topic.
+6. Use official documentation for technical claims. Do not invent framework behavior or present version-specific details without checking the relevant version.
+7. Keep the requested language consistent; preserve API names, commands, class names, and code syntax.
 
 ## Marp syntax
 
