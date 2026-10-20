@@ -1,101 +1,115 @@
-# Practical: Build Your Starter Workspace
+# Pratique — Developer Starter Pack
 
-## Goal
+## Objectif
 
-Create a tiny web project, serve it locally, inspect it in the browser, and record the work with Git. The exercise uses plain HTML and JavaScript so that no project dependency is required.
+Installer les outils de base, créer une page **Hello World**, observer son fonctionnement dans le navigateur et enregistrer le travail avec Git.
 
-## Prerequisites
+## 1. Préparer l'environnement
 
-- a code editor or IDE;
-- a browser with developer tools;
-- Git installed and configured with your name and email;
-- either a local server extension or a simple local server already available on your computer.
+Installer ou vérifier les outils suivants :
 
-Do not install every tool from the presentation. Use the smallest setup that completes the exercise.
+- un éditeur ou une IDE, par exemple [Visual Studio Code](https://code.visualstudio.com/docs/getstarted/overview) ;
+- [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) ;
+- un navigateur avec les Developer Tools ;
+- [Node.js](https://nodejs.org/en/download) seulement si le projet utilise JavaScript et npm.
 
-## Step 1: Create the workspace
+Dans le terminal, vérifier les outils disponibles :
 
-Create a folder named `developer-starter-pack` and add two files:
+```bash
+git --version
+node --version
+npm --version
+```
 
-`index.html`
+Les commandes `node` et `npm` sont optionnelles pour cet exercice. Si elles ne sont pas installées, continue avec l'éditeur, le navigateur et Git.
+
+## 2. Créer le premier projet
+
+Créer un dossier nommé `developer-starter-pack`, puis ajouter un fichier `index.html` :
 
 ```html
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Developer Starter Pack</title>
   </head>
   <body>
-    <h1>My starter workspace</h1>
-    <button id="check-button">Check the setup</button>
-    <p id="status">Not checked yet.</p>
+    <h1>Hello World</h1>
+    <p id="status">Le projet est prêt.</p>
+    <button id="check-button">Tester JavaScript</button>
     <script src="app.js"></script>
   </body>
 </html>
 ```
 
-`app.js`
+Ajouter ensuite `app.js` :
 
 ```js
 const button = document.querySelector('#check-button');
 const status = document.querySelector('#status');
 
 button.addEventListener('click', () => {
-  status.textContent = 'The browser loaded the project and JavaScript is running.';
+  status.textContent = 'JavaScript fonctionne correctement.';
 });
 ```
 
-## Step 2: Run the project
+## 3. Démarrer et vérifier
 
-Start a local server for the folder and open `index.html` through the server address. Do not rely on a `file://` URL for this exercise: a local server better represents how a browser loads a web project.
+Ouvrir le dossier dans l'éditeur, puis ouvrir `index.html` dans le navigateur. Si un serveur local est disponible, utiliser-le de préférence. Avec Python installé, une possibilité est :
 
-Expected result: the page shows the heading, the button, and the message `Not checked yet.`
+```bash
+python -m http.server 5500
+```
 
-## Step 3: Inspect the project
+Ouvrir ensuite `http://localhost:5500`.
 
-Open the browser developer tools and complete these checks:
+Vérifier les éléments suivants dans les Developer Tools :
 
-1. In **Elements**, find the button and the status paragraph.
-2. In **Console**, confirm that no error is shown after loading the page.
-3. Click the button and verify that the status changes.
-4. In **Network**, reload the page and confirm that `index.html` and `app.js` are requested successfully.
+1. **Elements** : le titre, le paragraphe et le bouton sont présents ;
+2. **Console** : aucune erreur n'est affichée ;
+3. **Network** : `index.html` et `app.js` sont chargés ;
+4. cliquer sur le bouton : le message change.
 
-## Step 4: Save the work with Git
+## 4. Enregistrer le travail avec Git
 
-Run these commands from the project folder:
+Depuis le dossier du projet :
 
 ```bash
 git init
-git status
 git add index.html app.js
 git commit -m "Create developer starter workspace"
 git log --oneline -1
 ```
 
-Expected result: Git reports a clean working tree after the commit, and the last log entry has the message shown above.
+Le dernier commit doit apparaître dans l'historique.
 
-## Step 5: Write your setup checklist
+## 5. Autoformation
 
-Create `SETUP.md` and answer these questions in your own words:
+Consulter les ressources suivantes :
 
-- Which editor or IDE did you use, and what did it help you do?
-- Which browser panels did you use?
-- Which runtime or local server did the project need?
-- What does Git record in this exercise?
-- Which tool would you remove if the project did not need it?
+- [Visual Studio Code — Get started](https://code.visualstudio.com/docs/getstarted/overview) ;
+- [Git — Installing Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) ;
+- [MDN — Basic HTML syntax](https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Structuring_content/Basic_HTML_syntax).
 
-Commit the checklist as a second, separate commit.
+Répondre ensuite aux questions suivantes :
 
-## Challenge
+1. Quelle est la différence entre un éditeur et un runtime ?
+2. Pourquoi utiliser les Developer Tools ?
+3. Que contient un commit Git ?
+4. Dans quel cas Node.js et npm deviennent-ils nécessaires ?
 
-Add a small `style.css` file and connect it to the page. Then use the Network panel to verify that the stylesheet loads successfully. Make a third Git commit with a message that describes the change.
+### Défi
 
-## Completion checklist
+Ajouter `style.css`, modifier l'apparence du titre et créer un deuxième commit. Puis vérifier dans l'onglet **Network** que la feuille de style est bien chargée.
 
-- [ ] The project opens through a local server.
-- [ ] The button updates the page without a console error.
-- [ ] The browser Network panel shows successful file requests.
-- [ ] The initial files are stored in a Git commit.
-- [ ] `SETUP.md` explains the purpose of the tools you used.
+## Validation
+
+- [ ] Les outils nécessaires sont installés ou vérifiés.
+- [ ] La page affiche `Hello World`.
+- [ ] Le bouton modifie le message sans erreur dans la console.
+- [ ] `index.html` et `app.js` sont chargés correctement.
+- [ ] Le travail est enregistré dans un commit Git.
+- [ ] Les réponses de l'autoformation sont rédigées.
+- [ ] Le défi CSS est réalisé ou expliqué.

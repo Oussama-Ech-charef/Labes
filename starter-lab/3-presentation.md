@@ -7,45 +7,62 @@ size: 16:9
 
 # Developer Starter Pack
 
-## A focused setup for starting a project
+## Commencer un projet avec les bons outils
 
 ---
 
-## The four essentials
+## Plan
 
-- **Editor or IDE** — write and navigate code
-- **Browser and DevTools** — observe web behavior
-- **Runtime** — execute the program
-- **Git** — record meaningful changes
-
----
-
-## Choose by need
-
-Do not install every available tool.
-
-1. Identify what the project must do.
-2. Select the smallest tool that supports that work.
-3. Test the tool with a small, visible result.
-4. Record the setup so another developer can repeat it.
+1. Définitions
+2. Installation et outils
+3. Démarrage rapide
+4. Autoformation
 
 ---
 
-## A repeatable workflow
+## 1. Définitions
+
+- Éditeur ou IDE : écrire et organiser le code
+- Terminal : exécuter des commandes
+- Runtime : exécuter le programme
+- Git : enregistrer les changements
+
+---
+
+## 2. Installation
+
+- Visual Studio Code ou une IDE
+- Git
+- Un navigateur avec DevTools
+- Node.js et npm si le projet en a besoin
+
+---
+
+## 3. Hello World
 
 ```text
-Edit → Run → Inspect → Fix → Commit
+Préparer → Installer → Créer → Exécuter → Vérifier
 ```
 
-The workflow is more valuable than a long list of extensions.
+Créer une page `index.html`, l'ouvrir dans le navigateur et afficher :
+
+```html
+<h1>Hello World</h1>
+```
+
+Résultat attendu : le navigateur affiche le titre.
 
 ---
 
-## Final check
+## 4. Autoformation
 
-- Can the project run locally?
-- Can you inspect its output?
-- Can you explain the tools you installed?
-- Can you identify what changed in Git?
+- Lire la documentation HTML et Git.
+- Refaire la page sans recopier l'exemple.
+- Ajouter un bouton et un style CSS.
+- Enregistrer le résultat avec Git.
 
-See the [practical exercise](practical.md) to apply the workflow.
+---
+
+## À retenir
+
+Choisir les bons outils, obtenir un premier résultat, puis apprendre de manière autonome.

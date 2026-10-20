@@ -1,26 +1,42 @@
-# Introduction: Developer Starter Pack
+# Introduction — Developer Starter Pack
 
-A developer starter pack is a small, reliable set of tools and habits that helps you begin a project. It is not a list of every tool available. It is the minimum environment you can understand, use, and maintain.
+Un **Developer Starter Pack** est l'ensemble minimal d'outils et d'habitudes qui permet de commencer un projet, d'exécuter son code, d'observer le résultat et de conserver les changements.
 
-Starting with a focused setup reduces friction. You can edit files, run the project, inspect its behavior, and save changes in a traceable way. When a problem appears, a simple setup also makes it easier to determine whether the cause is your code or your environment.
+Il ne s'agit pas d'installer tous les outils disponibles. Le bon starter pack dépend du projet : une page HTML n'a pas les mêmes besoins qu'une application PHP, Python, JavaScript ou mobile.
 
-## Why it matters
+## Pourquoi ce sujet est important
 
-Good tools do not replace good reasoning, but they make good reasoning easier:
+Un environnement simple et bien compris réduit les problèmes au début d'un projet. L'apprenant sait :
 
-- an editor helps you read and change code;
-- a browser and its developer tools help you observe web pages and requests;
-- a runtime executes programs outside the editor;
-- version control records what changed and gives you a safe point to return to;
-- a terminal lets you repeat commands instead of relying on hidden clicks.
+- où écrire le code ;
+- comment exécuter le projet ;
+- comment inspecter les erreurs ;
+- comment sauvegarder une étape fonctionnelle.
 
-Install only what the project needs. For example, a small HTML and CSS exercise may need a browser, an editor, and a local server, while a Node.js project also needs Node.js and npm.
+## Parcours du lab
 
-## Learning objectives
+### 1. Définitions
 
-After this lab, you should be able to:
+Découvrir le rôle de l'éditeur, du terminal, du runtime, du package manager, du navigateur, des outils de développement et de Git.
 
-1. describe the purpose of the core parts of a developer setup;
-2. distinguish an editor from a runtime and a tool from an extension;
-3. select a small toolset for a project without collecting unnecessary software;
-4. create a project checklist and prove that each selected tool works.
+### 2. Installation et démarrage
+
+Installer ou vérifier les outils nécessaires, puis créer une petite page web.
+
+### 3. Hello World
+
+Afficher un premier résultat visible dans le navigateur et vérifier que le code fonctionne.
+
+### 4. Autoformation
+
+Utiliser la documentation officielle, refaire l'exercice sans recopier la solution et proposer une amélioration personnelle.
+
+## Objectifs d'apprentissage
+
+À la fin de ce lab, l'apprenant doit être capable de :
+
+1. expliquer ce qu'est un environnement de développement ;
+2. choisir les outils nécessaires pour un petit projet ;
+3. vérifier une installation depuis le terminal ;
+4. créer, exécuter et inspecter une page Hello World ;
+5. enregistrer une première version avec Git.

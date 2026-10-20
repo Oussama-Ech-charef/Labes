@@ -1,30 +1,31 @@
-# Starter Lab: Developer Starter Pack
+# Lab Starter — Developer Starter Pack
 
-## Subject
+## Sujet
 
-The essential tools and habits for starting a software development project.
+Les outils et les habitudes essentiels pour commencer un projet de développement.
 
-## Learning objectives
+Ce lab suit le parcours commun du projet : définitions, installation et démarrage, premier résultat, puis autoformation.
 
-By the end of this lab, you should be able to:
+## Objectifs d'apprentissage
 
-- identify the role of an editor or IDE, a browser, a runtime, and version control;
-- choose a small, appropriate toolset for a new project;
-- create a clean project workspace and verify that the tools work together;
-- use a short Git workflow to save and explain your work.
+À la fin du lab, l'apprenant doit pouvoir :
 
-## Lab contents
+- expliquer ce qu'est un environnement de développement ;
+- distinguer un éditeur, un runtime, un package manager et Git ;
+- installer et vérifier les outils de base ;
+- créer une petite page **Hello World** ;
+- utiliser les outils du navigateur et enregistrer son travail avec Git ;
+- continuer son apprentissage avec des ressources fiables.
 
-1. [Introduction](introduction.md) — why a starter pack matters and what to learn.
-2. [Definition](definition.md) — the main tools, terms, and selection principles.
-3. [Practical exercise](practical.md) — build and test a minimal starter workspace.
-4. [Presentation](presentation.md) — a short Marp summary of the lab.
-5. [Original presentation](starter.md) — the existing visual deck for this topic.
+## Contenu du lab
 
-## Recommended audience
+1. [Introduction](1-introduction.md) — rôle et objectifs du starter pack.
+2. [Définitions](2-definition.md) — outils, concepts et fonctionnement.
+3. [Présentation](3-presentation.md) — résumé visuel du lab.
+4. [Pratique](4-practical.md) — installation, Hello World et autoformation.
 
-Beginners who are preparing their first web, scripting, or application project.
+## Prérequis
 
-## Suggested order
-
-Read the introduction, study the definitions, complete the practical exercise, and use the presentations as a review checklist.
+- savoir créer et organiser des fichiers ;
+- avoir un ordinateur et un navigateur ;
+- aucune connaissance avancée en programmation n'est nécessaire.

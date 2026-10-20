@@ -1,52 +1,56 @@
-# Definition: Developer Starter Pack
+# Définitions — Developer Starter Pack
 
-## Core definition
+## Qu'est-ce qu'un environnement de développement ?
 
-A **Developer Starter Pack** is the initial collection of software, accounts, workspace conventions, and repeatable habits used to develop, run, inspect, and save a project.
+Un environnement de développement est l'ensemble des outils utilisés pour écrire, exécuter, tester et maintenir un projet. Il comprend généralement un éditeur ou une IDE, un terminal, un runtime adapté au langage, un navigateur pour les projets web et un système de contrôle de version.
 
-The pack is **project-dependent**. A web project, a Python script, and an Android application do not require exactly the same tools.
+## Concepts essentiels
 
-## Key concepts
+### Éditeur ou IDE
 
-### Code editor or IDE
+Un **éditeur de code** sert à écrire et modifier les fichiers du projet. Une **IDE** ajoute généralement des fonctions comme la navigation dans le code, le débogage et l'exécution de tâches. Visual Studio Code est un éditeur extensible ; les produits JetBrains sont des exemples d'IDE spécialisés.
 
-A **code editor** is used to create and edit source files. An **IDE** (Integrated Development Environment) usually combines an editor with language support, navigation, debugging, testing, and project features. Visual Studio Code is a flexible editor; JetBrains products are examples of IDEs focused on particular languages or ecosystems.
+### Terminal
 
-### Extension
-
-An **extension** adds a feature to an editor. Examples include formatting, code navigation, Markdown preview, and Git visualization. Extensions should solve a real problem; too many can make an editor slower or harder to understand.
+Le **terminal** permet d'exécuter des commandes, de lancer un programme, de vérifier une installation et de répéter une procédure de manière claire.
 
 ### Runtime
 
-A **runtime** is the software that executes a program. Node.js runs JavaScript outside the browser, Python runs Python programs, and a Java Development Kit (JDK) supports Java development. A runtime is not the same thing as an editor: one executes code, while the other helps you write it.
+Un **runtime** est le logiciel qui exécute un programme. Par exemple, Node.js exécute JavaScript en dehors du navigateur. Le runtime dépend du langage et du type de projet.
 
 ### Package manager
 
-A **package manager** downloads and manages reusable project packages. npm is commonly used with Node.js. A package manager can be useful, but it also introduces project files and dependencies, so it should be used deliberately.
+Un **package manager** installe et gère les dépendances d'un projet. npm accompagne généralement Node.js. D'autres écosystèmes utilisent Composer, pip ou Maven.
 
-### Version control
+### Git
 
-**Version control** records changes to files over time. Git is the tool; GitHub and GitLab are hosting services that can store Git repositories and support collaboration. A commit is a named checkpoint, not a replacement for a backup strategy.
+**Git** enregistre l'historique des modifications. Un commit représente un état identifié du projet. GitHub est un service qui peut héberger un dépôt Git et faciliter le partage du code.
 
-### Local server
+### Navigateur et DevTools
 
-A **local server** serves a project from your own computer so that a browser can load it through a local address. It is useful for testing pages, routes, assets, and browser behavior before deployment.
+Le navigateur affiche une application web. Ses **Developer Tools** permettent notamment d'inspecter le HTML, de lire la console et d'observer les requêtes réseau.
 
-### Developer tools
+### Serveur local
 
-**Developer tools** are browser panels used to inspect and troubleshoot a web page. Common panels include Elements, Console, Network, and Application. They show what the browser receives and does; they do not automatically fix the source code.
+Un serveur local rend le projet accessible depuis une adresse sur l'ordinateur, par exemple `http://localhost:5500`. Il permet de tester le comportement d'une page dans des conditions proches d'un site servi par un serveur.
 
-## A useful selection rule
+## Fonctionnement général
 
-Choose a tool when it answers a concrete need:
+Le travail quotidien suit souvent ce parcours :
 
-| Need | Suitable category |
-| --- | --- |
-| Write and navigate code | Editor or IDE |
-| Execute the project | Runtime |
-| Inspect a web page | Browser developer tools |
-| Save a meaningful change | Git |
-| Serve local web files | Local server |
-| Store structured data locally | SQLite or a database server |
+```text
+Choisir les outils → Écrire le code → Exécuter → Inspecter → Corriger → Committer
+```
 
-The smallest toolset that lets you work confidently is a good starter pack.
+Chaque outil a un rôle précis. L'éditeur écrit le code, le runtime l'exécute, le navigateur montre le résultat et Git conserve les étapes importantes.
+
+## À ne pas confondre
+
+- **Éditeur** : aide à écrire le code ; il n'exécute pas nécessairement le programme.
+- **Runtime** : exécute le programme ; il ne remplace pas l'éditeur.
+- **Git** : suit l'historique local ; GitHub est une plateforme d'hébergement et de collaboration.
+- **Dépendance** : code utilisé par le projet ; elle n'est pas forcément un outil installé globalement.
+
+## Résumé
+
+Un bon starter pack est petit, adapté au projet et vérifiable. Il doit permettre d'écrire, d'exécuter, d'inspecter et de sauvegarder un premier résultat.
