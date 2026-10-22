@@ -5,20 +5,21 @@ paginate: true
 size: 16:9
 style: |
   section {
-    background-color: #0f172a;
-    color: #f8fafc;
+    background-color: #ffffff;
+    color: #111827;
     font-family: 'Inter', system-ui, sans-serif;
     padding: 40px 60px;
   }
-  h1, h2, h3 { color: #38bdf8; letter-spacing: 0.5px; }
-  section.light { background-color: #f8fafc; color: #0f172a; }
-  section.light h1, section.light h2, section.light h3 { color: #0284c7; }
-  pre, code { background-color: #1e293b; color: #e2e8f0; border-radius: 6px; }
-  section.light pre, section.light code { background-color: #e2e8f0; color: #0f172a; }
+  h1, h2, h3 { color: #1d4ed8; letter-spacing: 0.5px; }
+  section.light { background-color: #ffffff; color: #111827; }
+  section.light h1, section.light h2, section.light h3 { color: #1d4ed8; }
+  pre, code { background-color: #eff6ff; color: #111827; border-radius: 6px; }
+  section.light pre, section.light code { background-color: #eff6ff; color: #111827; }
   table { width: 100%; border-collapse: collapse; }
-  th { background-color: #0284c7; color: #ffffff; padding: 10px; }
-  td { padding: 8px; border-bottom: 1px solid #334155; }
-  section.light td { border-bottom: 1px solid #cbd5e1; }
+  th { background-color: #2563eb; color: #ffffff; padding: 10px; }
+  td { color: #111827; padding: 8px; border-bottom: 1px solid #bfdbfe; }
+  section.light td { color: #111827; border-bottom: 1px solid #bfdbfe; }
+  strong, a { color: #1d4ed8; }
 ---
 
 # Codes HTTP et erreurs courantes

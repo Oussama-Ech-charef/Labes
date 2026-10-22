@@ -75,58 +75,65 @@ Every presentation must be output as a single file `lab-<topic>.md` with `marp: 
    paginate: true
    size: 16:9
    style: |
-     section {
-       background-color: #0f172a;
-       color: #f8fafc;
+      section {
+        background-color: #ffffff;
+        color: #111827;
        font-family: 'Inter', system-ui, sans-serif;
        padding: 40px 60px;
      }
      h1, h2, h3 {
-       font-family: 'Anton', 'Impact', sans-serif;
-       color: #38bdf8;
+        font-family: 'Inter', system-ui, sans-serif;
+        color: #1d4ed8;
        letter-spacing: 0.5px;
      }
      section.light {
-       background-color: #f8fafc;
-       color: #0f172a;
+        background-color: #ffffff;
+        color: #111827;
      }
      section.light h1, section.light h2, section.light h3 {
-       color: #0284c7;
+        color: #1d4ed8;
      }
      pre, code {
-       background-color: #1e293b;
-       color: #e2e8f0;
+        background-color: #eff6ff;
+        color: #111827;
        border-radius: 6px;
        font-family: 'Fira Code', 'Consolas', monospace;
      }
      section.light pre, section.light code {
-       background-color: #e2e8f0;
-       color: #0f172a;
+        background-color: #eff6ff;
+        color: #111827;
      }
      table {
        width: 100%;
        border-collapse: collapse;
      }
      th {
-       background-color: #0284c7;
+        background-color: #2563eb;
        color: #ffffff;
        padding: 10px;
      }
-     td {
-       padding: 8px;
-       border-bottom: 1px solid #334155;
+      td {
+        color: #111827;
+        padding: 8px;
+        border-bottom: 1px solid #bfdbfe;
      }
      section.light td {
-       border-bottom: 1px solid #cbd5e1;
+        color: #111827;
+        border-bottom: 1px solid #bfdbfe;
      }
+      strong, a { color: #1d4ed8; }
    ---
    ```
 
 2. **Slide Delimiters:**
    - Always use `---` on a new line to separate slides.
 
-3. **Alternating Visual Rhythm:**
-   - Alternate between dark background slides (default) and light background slides (`<!-- _class: light -->`) to maintain audience focus and clear visual demarcation.
+3. **Visual Theme and Contrast:**
+   - Use a white background on every slide.
+   - Use black or near-black body text for readability.
+   - Use blue for headings, links, emphasis, and table headers.
+   - Set table-cell text explicitly to a dark color so it never disappears on white cells.
+   - The `<!-- _class: light -->` marker may remain for slide structure, but it must keep the same white/black/blue palette.
 
 4. **Code & Syntax Declaration:**
    - Always specify the language tag on every code fence (e.g., ```` ```javascript ````, never bare ```` ``` ````).
@@ -143,31 +150,35 @@ paginate: true
 size: 16:9
 style: |
   section {
-    background-color: #0f172a;
-    color: #f8fafc;
+    background-color: #ffffff;
+    color: #111827;
     font-family: 'Inter', system-ui, sans-serif;
     padding: 40px 60px;
   }
   h1, h2, h3 {
-    font-family: 'Anton', 'Impact', sans-serif;
-    color: #38bdf8;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #1d4ed8;
   }
   section.light {
-    background-color: #f8fafc;
-    color: #0f172a;
+    background-color: #ffffff;
+    color: #111827;
   }
   section.light h1, section.light h2, section.light h3 {
-    color: #0284c7;
+    color: #1d4ed8;
   }
   pre, code {
-    background-color: #1e293b;
-    color: #e2e8f0;
+    background-color: #eff6ff;
+    color: #111827;
     border-radius: 6px;
   }
   section.light pre, section.light code {
-    background-color: #e2e8f0;
-    color: #0f172a;
+    background-color: #eff6ff;
+    color: #111827;
   }
+  table { width: 100%; border-collapse: collapse; }
+  th { background-color: #2563eb; color: #ffffff; padding: 10px; }
+  td { color: #111827; padding: 8px; border-bottom: 1px solid #bfdbfe; }
+  strong, a { color: #1d4ed8; }
 ---
 
 # [Titre du Lab Uniquement]
