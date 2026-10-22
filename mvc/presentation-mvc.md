@@ -1,107 +1,96 @@
 ---
 marp: true
 theme: default
-size: 16:9
 paginate: true
-html: true
+size: 16:9
 style: |
   section {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #ffffff;
-    color: #172033;
-    padding: 48px 58px;
-    font-size: 25px;
-  }
-  h1, h2, h3 { color: #155eef; }
-  h1 { font-size: 2.1em; letter-spacing: -0.03em; }
-  h2 { font-size: 1.45em; margin-bottom: 0.65em; }
-  strong { color: #155eef; }
-  a { color: #155eef; }
-  ul { line-height: 1.45; }
-  li { margin: 0.22em 0; }
-  section.lead {
-    background: #101828;
+    background-color: #0f172a;
     color: #f8fafc;
-    text-align: left;
-    justify-content: center;
+    font-family: 'Inter', system-ui, sans-serif;
+    padding: 40px 60px;
   }
-  section.lead h1 { color: #ffffff; font-size: 3em; }
-  section.lead h2 { color: #84adff; font-size: 1.2em; font-weight: normal; }
-  section.lead strong { color: #84adff; }
-  section.lead a { color: #84adff; }
-  section.small { font-size: 19px; }
-  section footer { color: #667085; font-size: 13px; }
-  section.lead footer { color: #98a2b3; }
-  table { font-size: 20px; width: 100%; }
-  th { background: #eff4ff; color: #1849a9; }
-  td, th { padding: 8px 10px; }
-  code { color: #175cd3; }
-  pre { font-size: 17px; border-radius: 10px; background: #f8fafc; }
-  blockquote { border-left: 5px solid #155eef; background: #eff4ff; padding: 12px 20px; color: #344054; }
+  h1, h2, h3 { color: #38bdf8; letter-spacing: 0.5px; }
+  section.light { background-color: #f8fafc; color: #0f172a; }
+  section.light h1, section.light h2, section.light h3 { color: #0284c7; }
+  pre, code { background-color: #1e293b; color: #e2e8f0; border-radius: 6px; }
+  section.light pre, section.light code { background-color: #e2e8f0; color: #0f172a; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background-color: #0284c7; color: #ffffff; padding: 10px; }
+  td { padding: 8px; border-bottom: 1px solid #334155; }
+  section.light td { border-bottom: 1px solid #cbd5e1; }
 ---
-
-<!-- _class: lead -->
 
 # L'architecture MVC
 
-## Model · View · Controller
+---
+<!-- _class: light -->
 
-**Organiser une application Web Laravel**
+## Lab Plan
+
+1. Introduction
+2. Problems Encountered
+3. Solutions Implemented
 
 ---
 
-## Plan
+## 1. Introduction
 
-1. Comprendre le principe MVC
-2. Identifier le rôle du Model, de la View et du Controller
-3. Suivre un exemple Laravel de bout en bout
-4. Comprendre l'intérêt de séparer les responsabilités
-5. Retenir les idées essentielles
+- **Objectif :** séparer les responsabilités d'une application Web.
+- **Model :** données et règles métier.
+- **View :** interface présentée à l'utilisateur.
+- **Controller :** coordination de la requête et choix de la réponse.
+
+---
+<!-- _class: light -->
+
+## 2. Problems Encountered
+
+- Mélanger SQL, logique métier et HTML dans un même fichier complique la maintenance.
+- Un contrôleur trop chargé devient difficile à tester.
+- Une vue ne doit pas connaître les détails d'accès à la base de données.
+- Un mauvais passage de données produit une page vide ou une erreur de variable.
 
 ---
 
-## 1. MVC en une phrase
+## 3. Solutions Implemented
 
-MVC sépare une application en trois responsabilités :
-
-- **Model** : données et règles métier ;
-- **View** : interface visible par l'utilisateur ;
-- **Controller** : reçoit la requête et coordonne le traitement.
-
-> Le but : ne pas mélanger SQL, logique métier et HTML dans un seul fichier.
+- Faire passer la requête par la chaîne **Route → Controller → Model → View**.
+- Garder le contrôleur comme coordinateur et déplacer l'accès aux données dans le modèle.
+- Transmettre à la vue un contrat de données explicite.
+- Tester les responsabilités séparément.
 
 ---
+<!-- _class: light -->
 
-## 2. Le rôle de chaque partie
+## Practical Implementation: responsabilités
 
-| Partie | Rôle dans Laravel | Exemple |
-|---|---|---|
-| **Model** | Accéder aux données et à leurs relations | `Categorie` avec Eloquent |
-| **View** | Présenter les données | `categories/index.blade.php` |
-| **Controller** | Coordonner la requête | `CategorieController@index` |
+| Partie | Responsabilité | Exemple Laravel |
+|:---|:---|:---|
+| **Model** | Données et relations | `Categorie` avec Eloquent |
+| **View** | Présentation HTML | `categories/index.blade.php` |
+| **Controller** | Coordination | `CategorieController@index` |
 
 ```text
-Requête HTTP → Controller → Model / Base de données
-                              ↓
-                         View → Réponse HTML
+Navigateur → Route → Controller → Model / Base de données
+                                      ↓
+                                View → HTML
 ```
 
 ---
 
-## 3. Exemple : afficher les catégories
-
-La route associe l'URL `/categories` au Controller :
+## Practical Implementation: route et contrôleur
 
 ```php
 // routes/web.php
 use App\Http\Controllers\CategorieController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/categories', [CategorieController::class, 'index']);
 ```
 
-Le Controller demande les données au Model :
-
 ```php
+// CategorieController.php
 public function index()
 {
     $categories = Categorie::all();
@@ -111,13 +100,12 @@ public function index()
 ```
 
 ---
+<!-- _class: light -->
 
-## 4. La View Blade
-
-La View reçoit les données et produit le HTML :
+## Practical Implementation: la vue
 
 ```blade
-<!-- resources/views/categories/index.blade.php -->
+{{-- resources/views/categories/index.blade.php --}}
 <h1>Catégories</h1>
 
 @foreach ($categories as $categorie)
@@ -125,46 +113,27 @@ La View reçoit les données et produit le HTML :
 @endforeach
 ```
 
-Le résultat du parcours est :
-
-```text
-Navigateur → Route → Controller → Model → View → HTML
-```
+La vue reçoit les données ; elle ne décide pas comment les rechercher.
 
 ---
 
-## 5. Pourquoi séparer les responsabilités ?
+## Practical Implementation: anti-patterns
 
-- **Maintenance :** chaque fichier a un rôle clair.
-- **Réutilisation :** un Model peut servir à plusieurs Controllers.
-- **Tests :** les parties peuvent être testées séparément.
-- **Évolution :** une View Blade peut être remplacée par une réponse JSON.
-
-### À éviter
-
-- SQL dans la View ;
-- HTML dans le Model ;
-- Controller qui contient toute la logique de l'application.
+| À éviter | Pourquoi | Alternative |
+|:---|:---|:---|
+| SQL dans la View | Couplage fort | Modèle ou service |
+| HTML dans le Model | Responsabilités mélangées | Vue Blade |
+| Contrôleur géant | Tests et évolution difficiles | Méthodes ciblées |
+| Variables implicites | Erreurs de rendu | Contrat explicite |
 
 ---
+<!-- _class: light -->
 
-## 6. À retenir
+## Summary & Verification Matrix
 
-```text
-Model      = données et règles métier
-View       = interface utilisateur
-Controller = coordination de la requête
-```
-
-Dans Laravel, MVC aide à construire une application plus lisible, testable et facile à faire évoluer.
-
----
-
-## Sources
-
-- [Laravel — Controllers](https://laravel.com/docs/13.x/controllers)
-- [Laravel — Request Lifecycle](https://laravel.com/docs/13.x/lifecycle)
-- [Laravel — Frontend et Blade](https://laravel.com/docs/13.x/frontend)
-- [Laravel — Eloquent ORM](https://laravel.com/docs/13.x/eloquent)
-- [Marp](https://marp.app/)
-
+| Objectif | Statut | Preuve de validation |
+|:---|:---:|:---|
+| Définir MVC | Validé | Rôles Model/View/Controller |
+| Suivre le parcours d'une requête | Validé | Schéma de flux |
+| Séparer le code | Validé | Exemples Laravel distincts |
+| Éviter les anti-patterns | Validé | Matrice de vérification |

@@ -1,120 +1,132 @@
+---
+marp: true
+theme: default
+paginate: true
+size: 16:9
+style: |
+  section {
+    background-color: #0f172a;
+    color: #f8fafc;
+    font-family: 'Inter', system-ui, sans-serif;
+    padding: 40px 60px;
+  }
+  h1, h2, h3 { color: #38bdf8; letter-spacing: 0.5px; }
+  section.light { background-color: #f8fafc; color: #0f172a; }
+  section.light h1, section.light h2, section.light h3 { color: #0284c7; }
+  pre, code { background-color: #1e293b; color: #e2e8f0; border-radius: 6px; }
+  section.light pre, section.light code { background-color: #e2e8f0; color: #0f172a; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background-color: #0284c7; color: #ffffff; padding: 10px; }
+  td { padding: 8px; border-bottom: 1px solid #334155; }
+  section.light td { border-bottom: 1px solid #cbd5e1; }
+---
+
 # Markdown
 
-## What is Markdown?
+---
+<!-- _class: light -->
 
-* A simple markup language
-* Used to format text
-* Easy to learn and write
-* Uses plain text and simple symbols
+## Lab Plan
+
+1. Introduction
+2. Problems Encountered
+3. Solutions Implemented
 
 ---
 
-## Why Use Markdown?
+## 1. Introduction
 
-* Simple
-* Fast
-* Easy to read
-* Easy to edit
-* Works on many platforms
+- **Objectif :** rédiger des documents lisibles avec du texte brut et une syntaxe légère.
+- **Périmètre :** titres, emphase, listes, liens, images, code, tableaux et tâches.
+- **Outils :** éditeur de texte, aperçu Markdown et dépôt Git.
+
+---
+<!-- _class: light -->
+
+## 2. Problems Encountered
+
+- Oublier l'espace après `#` ou mélanger les niveaux de titres brouille la hiérarchie.
+- Un bloc de code non fermé casse tout le rendu situé après lui.
+- Un tableau sans ligne d'alignement n'est pas interprété correctement.
 
 ---
 
-## Basic Markdown
+## 3. Solutions Implemented
 
-### Headings
-
-```markdown
-# Heading 1
-## Heading 2
-### Heading 3
-```
-
-### Text Formatting
-
-```markdown
-**Bold**
-*Italic*
-```
+- Utiliser une hiérarchie régulière : un seul titre principal, puis `##` et `###`.
+- Fermer chaque bloc avec trois accents graves et déclarer son langage.
+- Ajouter une ligne d'alignement explicite dans chaque tableau.
+- Vérifier le rendu dans l'aperçu avant de publier le fichier.
 
 ---
+<!-- _class: light -->
 
-## Lists
+## Practical Implementation: document de profil
 
-### Unordered List
+````markdown
+# Votre nom
 
-```markdown
-- HTML
-- CSS
-- JavaScript
-```
+## À propos de moi
 
-### Ordered List
+**Une courte description de votre profil.**
 
-```markdown
-1. Learn
-2. Practice
-3. Build
-```
+## Compétences
 
----
+- Compétence 1
+- Compétence 2
+- Compétence 3
 
-## Links
+## Loisirs
 
-```markdown
-[GitHub](https://github.com)
-```
+1. Loisir 1
+2. Loisir 2
+3. Loisir 3
 
----
+## Profil
 
-## Images
-
-```markdown
-![My Image](image.jpg)
-```
-
----
+[GitHub](https://github.com/)
 
 ## Code
 
-### Inline Code
-
-```markdown
-Use `console.log()`
+```javascript
+console.log("Hello Markdown!");
 ```
+````
 
-### Code Block
+---
+
+## Practical Implementation: éléments courants
 
 ````markdown
-```javascript
-console.log("Hello World!");
-````
+## Liste
 
-````
+- HTML
+- CSS
+- JavaScript
 
----
+## Tableau
 
-## Tables
+| Nom | Langage |
+|:---|:---|
+| HTML | Balisage |
+| CSS | Style |
+| JavaScript | Script |
 
-```markdown
-| Name | Language |
-|------|----------|
-| HTML | Markup   |
-| CSS  | Style    |
-| JS   | Script   |
-````
+## Tâches
 
----
-
-## Task Lists
-
-```markdown
 - [x] HTML
 - [x] CSS
 - [ ] JavaScript
-```
+````
 
 ---
+<!-- _class: light -->
 
-# Thank You
+## Summary & Verification Matrix
 
-Let's Markdown!
+| Objectif | Statut | Preuve de validation |
+|:---|:---:|:---|
+| Structurer le document | Validé | Titres hiérarchisés |
+| Formater le contenu | Validé | Listes, liens et emphase rendus |
+| Ajouter du code | Validé | Fence `javascript` fermé |
+| Publier un résultat lisible | Validé | Aperçu Markdown vérifié |

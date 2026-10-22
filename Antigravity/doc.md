@@ -1,113 +1,118 @@
 ---
 marp: true
----
-# Antigravity: Small Documentation
-
-> Based on my knowledge and public guides. Names, menus, and folders may differ in your lab version, so check them in your lab.
-
----
-
-## 1. What is Antigravity?
-
-A development environment built around AI agents. The agents can plan, write code, run commands, and test your work, and you supervise them.
-
----
-
-
-## 3. Workflow
-
-**Plan → Review → Execute → Verify**
-
-1. **Plan**: Ask the agent for a plan first (for example with `/plan`).
-2. **Review**: Read the plan and fix it before any file is changed.
-3. **Execute**: Let the agent run the work.
-4. **Verify**: Test the result yourself.
-
----
-
-## 4. Prompt structure
-
-```
-Goal: [what to build or fix]
-Context: [project, language, framework]
-Scope: [where to work, what not to touch]
-Constraints: [rules, libraries, style]
-Process: Show me a plan first, then wait for my approval.
-Done when: [how to check it works]
-Output: Summarize your changes briefly.
-```
-
-Must have: Goal, Context, Scope, Done condition.
-
----
-
-## 5. Rules, Skills
-
-| Feature | Triggered by | Use it for |
-|---|---|---|
-| Rules | Always on | Standing guidelines and roles |
-| Skills | The agent decides | Reusable task expertise |
-
----
-
-### Make a rule (role)
-
-File: `.agents/rules/backend-developer.md`
-
-```
-You are a senior Laravel backend developer.
-- Always show a short plan before changing files.
-- Never touch the .env file.
-```
-
----
-
-### Make a skill
-
-File: `.agents/skills/laravel-crud/SKILL.md`
-
-```
----
-name: laravel-crud
-description: Builds a full CRUD in Laravel. Use when asked to create a CRUD.
----
-# Laravel CRUD
-1. Create the migration and the model.
-2. Create the controller with validation.
-3. Add the routes and the Blade views.
-```
-
----
-
-
-### Make the agent use them
-
-```
-Read C:/agent-kit/rules/ and follow them.
-Use the laravel-crud skill for this task.
-```
-
----
-
-## 6. MCP
-
-MCP connects the agent to outside tools (GitHub, Google Drive, databases).
-
-1. Open the agent panel, click the **"..."** menu, then **Manage MCP Servers**, then **View raw config**.
-2. Add a server inside `mcpServers` in `mcp_config.json`.
-3. Save, click **Refresh**, and restart Antigravity if the server doesn't appear.
-
----
-
-**Remote server (GitHub):**
-
-```json
-{
-  "mcpServers": {
-    "github": {
-      "serverUrl": "https://api.githubcopilot.com/mcp/",
-      "headers": { "Authorization": "Bearer YOUR_TOKEN_HERE" }
-    }
+theme: default
+paginate: true
+size: 16:9
+style: |
+  section {
+    background-color: #0f172a;
+    color: #f8fafc;
+    font-family: 'Inter', system-ui, sans-serif;
+    padding: 40px 60px;
   }
-}
+  h1, h2, h3 { color: #38bdf8; letter-spacing: 0.5px; }
+  section.light { background-color: #f8fafc; color: #0f172a; }
+  section.light h1, section.light h2, section.light h3 { color: #0284c7; }
+  pre, code { background-color: #1e293b; color: #e2e8f0; border-radius: 6px; }
+  section.light pre, section.light code { background-color: #e2e8f0; color: #0f172a; }
+  table { width: 100%; border-collapse: collapse; }
+  th { background-color: #0284c7; color: #ffffff; padding: 10px; }
+  td { padding: 8px; border-bottom: 1px solid #334155; }
+  section.light td { border-bottom: 1px solid #cbd5e1; }
+---
+
+# Antigravity
+
+---
+<!-- _class: light -->
+
+## Lab Plan
+
+1. Introduction
+2. Problems Encountered
+3. Solutions Implemented
+
+---
+
+## 1. Introduction
+
+- **Objectif :** travailler avec un environnement d'agents IA en gardant le contrôle du projet.
+- **Périmètre :** cadrage, planification, revue, exécution et vérification.
+- **Principe :** l'agent accélère le travail ; la personne reste responsable de la portée et du résultat.
+
+---
+<!-- _class: light -->
+
+## 2. Problems Encountered
+
+- Les noms de menus, versions et chemins peuvent différer selon l'installation.
+- Une demande trop générale peut provoquer des modifications hors périmètre.
+- Une exécution non relue peut introduire une erreur difficile à repérer.
+- Une règle ou une skill peut être ignorée si elle n'est pas explicitement prise en compte.
+
+---
+
+## 3. Solutions Implemented
+
+- Décrire le résultat attendu, le contexte, la portée et les contraintes.
+- Exiger un plan court avant toute modification.
+- Relire le plan, exécuter une étape à la fois et vérifier le résultat.
+- Demander un résumé des fichiers modifiés et des validations effectuées.
+
+---
+<!-- _class: light -->
+
+## Practical Implementation: workflow contrôlé
+
+```text
+Planifier → Relire → Exécuter → Vérifier → Résumer
 ```
+
+| Phase | Question de contrôle |
+|:---|:---|
+| Planifier | Quel résultat doit être obtenu ? |
+| Relire | Quels fichiers sont autorisés ? |
+| Exécuter | Chaque changement respecte-t-il la portée ? |
+| Vérifier | Comment prouver que cela fonctionne ? |
+| Résumer | Qu'est-ce qui a changé et pourquoi ? |
+
+---
+
+## Practical Implementation: prompt cadré
+
+```text
+Objectif : [ce qu'il faut construire ou corriger]
+Contexte : [projet, langage, framework]
+Portée : [fichiers autorisés, fichiers à ne pas toucher]
+Contraintes : [règles, style, bibliothèques]
+Processus : montrer un plan avant de modifier
+Terminé quand : [critères de vérification]
+Sortie : résumer les changements et les tests
+```
+
+---
+<!-- _class: light -->
+
+## Practical Implementation: règles et skills
+
+| Élément | Rôle | Exemple de contrôle |
+|:---|:---|:---|
+| Règle | Consigne persistante du projet | Ne pas toucher à `.env` |
+| Skill | Procédure spécialisée | Utiliser le format Marp d'un lab |
+| Prompt | Demande ponctuelle | Modifier uniquement un fichier |
+
+```text
+Avant de commencer : lire les règles et la skill applicables.
+Après l'exécution : vérifier les fichiers et le résultat attendu.
+```
+
+---
+
+## Summary & Verification Matrix
+
+| Objectif | Statut | Preuve de validation |
+|:---|:---:|:---|
+| Définir la portée | Validé | Prompt structuré |
+| Contrôler l'exécution | Validé | Workflow en 5 phases |
+| Utiliser les consignes | Validé | Règles et skills identifiées |
+| Vérifier le livrable | Validé | Critères et résumé final |
