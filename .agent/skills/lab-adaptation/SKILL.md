@@ -6,9 +6,16 @@ description: Use when generating, adapting, or formatting any lab deliverable or
 # Marp Lab Presentation Skill
 
 ## Overview
-Adapt and compile any completed technical task, lab deliverable, or technical assignment into a modern, standardized, and high-impact Marp presentation (`lab-<topic>.md`).
+Adapt and compile any completed technical task, lab deliverable, or technical assignment into a modern, standardized, and high-impact Marp presentation (`lab-<topic>/prisontation.md`).
 
 This skill strictly enforces visual rhythm, technical precision, and a fixed 5-part slide architecture without superfluous metadata.
+
+## Repository Path Convention
+
+- Create a dedicated folder named `lab-<topic>/` for each lab.
+- Store the single Marp presentation in that folder as `prisontation.md`.
+- Do not leave a duplicate `lab-<topic>.md` file at the repository root.
+- Update internal examples and references when a lab is moved into its folder.
 
 ---
 
@@ -27,7 +34,7 @@ Do NOT use for:
 
 ## Mandatory Slide Architecture
 
-Every presentation must be output as a single file `lab-<topic>.md` with `marp: true` and respect this sequential flow:
+Every presentation must be output as a single file `lab-<topic>/prisontation.md` with `marp: true` and respect this sequential flow:
 
 ### Slide 1: Title (Lab Name Only)
 - **Content:** The title / topic of the lab **only**.
@@ -140,7 +147,7 @@ Every presentation must be output as a single file `lab-<topic>.md` with `marp: 
 
 ---
 
-## Output Template (`lab-<topic>.md`)
+## Output Template (`lab-<topic>/prisontation.md`)
 
 ```markdown
 ---
@@ -236,7 +243,7 @@ function calculateTotal(items) {
 |:---|:---:|:---|
 | Setup & Configuration | ✅ Validé | Environnement opérationnel |
 | Résolution des bugs | ✅ Validé | Tests unitaires passants |
-| Livrable Marp | ✅ Validé | Fichier lab-<topic>.md généré |
+| Livrable Marp | ✅ Validé | Fichier lab-<topic>/prisontation.md généré |
 ```
 
 ---
