@@ -1,5 +1,5 @@
 ---
-name: marp-lab-presentation
+name: lab-adaptation
 description: Use when generating, adapting, or formatting any lab deliverable or technical assignment into a standardized Marp presentation
 ---
 
