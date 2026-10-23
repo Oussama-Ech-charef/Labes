@@ -15,9 +15,9 @@ style: |
   section.light h1, section.light h2, section.light h3 { color: #1d4ed8; }
   pre, code { background-color: #eff6ff; color: #111827; border-radius: 6px; }
   section.light pre, section.light code { background-color: #eff6ff; color: #111827; }
-  table { width: 100%; border-collapse: collapse; }
-  th { background-color: #2563eb; color: #ffffff; padding: 10px; }
-  td { color: #111827; padding: 8px; border-bottom: 1px solid #bfdbfe; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+  th { background-color: #2563eb; color: #ffffff; padding: 6px 8px; }
+  td { color: #111827; padding: 5px 8px; border-bottom: 1px solid #bfdbfe; }
   section.light td { color: #111827; border-bottom: 1px solid #bfdbfe; }
   strong, a { color: #1d4ed8; }
 ---

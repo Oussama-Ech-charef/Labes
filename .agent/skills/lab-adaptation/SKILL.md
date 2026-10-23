@@ -113,15 +113,16 @@ Every presentation must be output as a single file `lab-<topic>/prisontation.md`
      table {
        width: 100%;
        border-collapse: collapse;
+       font-size: 0.9em;
      }
      th {
         background-color: #2563eb;
        color: #ffffff;
-       padding: 10px;
+       padding: 6px 8px;
      }
       td {
         color: #111827;
-        padding: 8px;
+        padding: 5px 8px;
         border-bottom: 1px solid #bfdbfe;
      }
      section.light td {
@@ -144,6 +145,15 @@ Every presentation must be output as a single file `lab-<topic>/prisontation.md`
 
 4. **Code & Syntax Declaration:**
    - Always specify the language tag on every code fence (e.g., ```` ```javascript ````, never bare ```` ``` ````).
+
+## Layout Safety and Overflow Verification
+
+- Treat every slide as a fixed 16:9 canvas with a protected bottom margin for pagination.
+- Keep tables compact with `font-size: 0.9em`, header padding of `6px 8px`, and cell padding of `5px 8px`.
+- Split long tables, code blocks, and lists across slides instead of shrinking text until it becomes unreadable.
+- Never hide overflow to conceal missing content; every table row and text block must remain visible.
+- Render the complete deck with Marp preview or Marp CLI and inspect the bottom edge of every slide.
+- If a rendered slide exceeds its canvas, split or shorten the content and rerender until no content is clipped.
 
 ---
 
@@ -182,9 +192,9 @@ style: |
     background-color: #eff6ff;
     color: #111827;
   }
-  table { width: 100%; border-collapse: collapse; }
-  th { background-color: #2563eb; color: #ffffff; padding: 10px; }
-  td { color: #111827; padding: 8px; border-bottom: 1px solid #bfdbfe; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9em; }
+  th { background-color: #2563eb; color: #ffffff; padding: 6px 8px; }
+  td { color: #111827; padding: 5px 8px; border-bottom: 1px solid #bfdbfe; }
   strong, a { color: #1d4ed8; }
 ---
 

@@ -35,15 +35,16 @@ style: |
   table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 0.9em;
   }
   th {
     background-color: #2563eb;
     color: #ffffff;
-    padding: 10px;
+    padding: 6px 8px;
   }
   td {
     color: #111827;
-    padding: 8px;
+    padding: 5px 8px;
     border-bottom: 1px solid #bfdbfe;
   }
   section.light td {

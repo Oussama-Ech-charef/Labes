@@ -5,10 +5,12 @@ paginate: true
 size: 16:9
 style: |
   section {
+    box-sizing: border-box;
     background-color: #ffffff;
     color: #111827;
     font-family: 'Inter', system-ui, sans-serif;
     padding: 40px 60px;
+    line-height: 1.22;
   }
   h1, h2, h3 {
     font-family: 'Inter', system-ui, sans-serif;
@@ -28,6 +30,12 @@ style: |
     border-radius: 6px;
     font-family: 'Fira Code', 'Consolas', monospace;
   }
+  pre {
+    font-size: 0.72em;
+    line-height: 1.16;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
   section.light pre, section.light code {
     background-color: #eff6ff;
     color: #111827;
@@ -35,15 +43,16 @@ style: |
   table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 0.9em;
   }
   th {
     background-color: #2563eb;
     color: #ffffff;
-    padding: 10px;
+    padding: 6px 8px;
   }
   td {
     color: #111827;
-    padding: 8px;
+    padding: 5px 8px;
     border-bottom: 1px solid #bfdbfe;
   }
   section.light td {
@@ -53,7 +62,7 @@ style: |
   strong, a { color: #1d4ed8; }
 ---
 
-# Créer et tester des Skills avec des agents IA
+# lab-agent
 
 ---
 <!-- _class: light -->
@@ -68,144 +77,154 @@ style: |
 
 ## 1. Introduction
 
-- **Objectif :** créer un Skill réutilisable qui aide un agent IA à structurer et vérifier une tâche technique.
-- **Périmètre :** consignes persistantes, contexte, format attendu, critères de réussite et tests croisés.
-- **Agents ciblés :** Antigravity et GitHub Copilot dans VS Code.
-- **Résultat attendu :** un Skill lisible, un prompt de test identique et une grille de vérification comparable.
-- **Notions clés :** frontmatter YAML, Markdown, portée, validation, itération et traçabilité.
+Un **Skill** est un ensemble réutilisable d'instructions, d'exemples et, si besoin, de ressources qui aide un agent IA à réaliser une tâche.
+
+Dans ce lab, nous créons un Skill adapté à une tâche réelle, puis nous vérifions son fonctionnement dans **Antigravity** et **GitHub Copilot pour VS Code**.
+
+### Objectifs
+
+- Décrire une tâche et son résultat attendu.
+- Créer un `SKILL.md` clair et réutilisable.
+- Tester et améliorer le Skill dans les deux outils.
 
 ---
 <!-- _class: light -->
 
 ## 2. Problems Encountered
 
-- Les agents n'interprètent pas toujours de la même façon une consigne courte ou ambiguë.
-- Un Skill peut être découvert mais ignoré si son nom, sa description ou son emplacement ne sont pas explicites.
-- Les critères de réussite doivent être observables pour comparer Antigravity et Copilot.
-- Les interfaces et commandes disponibles peuvent différer selon la configuration locale de l'agent.
-- Dans cet environnement, Antigravity est installé mais son ouverture n'est pas autorisée par le contrôle Windows.
-- Le CLI Marp n'est pas disponible localement et le paquet n'est pas présent dans le cache hors ligne de `npx`.
+- Une tâche décrite de façon vague produit des résultats irréguliers.
+- Des instructions trop longues ou trop générales rendent le Skill difficile à suivre.
+- Un Skill placé dans un emplacement non reconnu peut ne pas être découvert.
+- Un Skill détecté peut quand même produire un résultat incomplet ou incorrect.
+- Les deux agents peuvent proposer des commandes et des preuves différentes.
 
 ---
+<!-- _class: light -->
 
 ## 3. Solutions Implemented
 
-- Définir un frontmatter minimal avec un nom stable et une description déclenchable.
-- Décomposer la procédure en étapes : lire le contexte, planifier, modifier, tester et résumer.
-- Utiliser un même scénario de test et une matrice commune pour les deux agents.
-- Exiger une preuve concrète : fichier produit, format respecté, test exécuté et limites signalées.
-- Remplacer le rendu indisponible par des contrôles structurels locaux, en conservant le rendu CI comme validation complémentaire.
-
----
-<!-- _class: light -->
-
-## Anatomy of a Skill
-
-| Élément | Rôle | Exemple de contrôle |
-|:---|:---|:---|
-| `name` | Identifie le Skill | Nom court et sans ambiguïté |
-| `description` | Déclenche le bon usage | Verbe d'action + contexte |
-| Instructions | Décrit la méthode | Étapes ordonnées et limites |
-| Critères | Rend le résultat vérifiable | Fichier, test et format attendus |
-| Cas limites | Évite les suppositions | Demander une précision ou signaler un blocage |
+- Définir une tâche précise, ses étapes et le livrable attendu.
+- Écrire un Skill court, spécialisé, testable et situé dans un chemin documenté.
+- Utiliser la même demande, le même exemple et les mêmes critères dans les deux outils.
+- Vérifier le résultat, documenter les preuves, puis améliorer les instructions.
 
 ---
 
-## Practical Implementation: Skill minimal
+## 1. Choisir une tâche
+
+Choisir une tâche déjà réalisée et que l'on pourrait refaire, par exemple :
+
+- rédiger une fiche de révision à partir de notes ;
+- résumer un document selon un format précis ;
+- vérifier une liste de fichiers selon des critères.
+
+Avant d'écrire le Skill, noter :
+
+1. le contexte nécessaire ;
+2. les étapes à suivre ;
+3. les règles à respecter ;
+4. le résultat attendu et la façon de le vérifier.
+
+---
+
+## 2. Créer le Skill
+
+Dans ce dépôt, les copies du Skill sont conservées dans les emplacements reconnus par le projet :
+
+```text
+.github/skills/lab-adaptation/SKILL.md
+.agent/skills/lab-adaptation/SKILL.md
+```
+
+Pour un nouveau Skill, créer un dossier au nom court et un fichier `SKILL.md`. Le fichier commence par un frontmatter YAML avec un nom et une description qui indiquent quand utiliser le Skill.
+
+---
+
+## 3. Écrire des instructions utiles
+
+Exemple de structure à adapter à une tâche précise :
 
 ```markdown
 ---
-name: task-structuring
-description: Use when transforming a technical request into a scoped, testable task
+name: fiche-revision
+description: Crée une fiche de révision concise à partir de notes de cours.
 ---
 
-# Task Structuring
+# Fiche de révision
 
-1. Read the request and identify the intended outcome.
-2. List the files, tools and constraints that are in scope.
-3. Produce a short plan before making changes.
-4. Implement only the requested change.
-5. Run the smallest relevant verification and report evidence.
+## Étapes
+1. Repérer les idées et termes importants.
+2. Les organiser par thème sans inventer d'information.
+3. Ajouter quelques questions de révision.
 
-## Done when
-
-- The requested artifact exists.
-- The acceptance criteria are checked.
-- Remaining limitations are stated explicitly.
+## Résultat attendu
+- Une fiche en français avec des titres et des listes courtes.
+- Une section finale de questions.
+- Signaler les informations manquantes.
 ```
 
-Ce format peut être placé dans le répertoire de Skills reconnu par l'agent.
+Un Skill doit décrire une compétence ou un processus précis, pas toutes les demandes possibles.
 
 ---
-<!-- _class: light -->
 
-## Practical Implementation: scénario de test commun
+## 4. Tester dans Antigravity
+
+1. Ouvrir le projet contenant le `SKILL.md`.
+2. Démarrer une conversation et demander le Skill par son nom ou sa commande.
+3. Donner un petit exemple représentatif de la tâche.
+4. Vérifier que le Skill est pris en compte et que le résultat respecte ses instructions.
+
+Si le Skill n'est pas détecté, vérifier son chemin, son nom, son frontmatter et les règles de découverte de la version utilisée.
+
+---
+
+## 5. Tester dans GitHub Copilot pour VS Code
+
+1. Ouvrir le même projet dans VS Code et sélectionner l'agent Copilot.
+2. Vérifier le Skill dans les personnalisations ou avec `/skills` si cette commande est disponible.
+3. Demander exactement la même tâche avec le même exemple.
+4. Vérifier le format, les règles et le résultat attendu.
+
+Dans ce dépôt, la référence principale est `.github/skills/lab-adaptation/SKILL.md`. La découverte peut varier selon l'agent et le mode d'utilisation.
+
+---
+
+## 6. Évaluer et améliorer
+
+Pour chaque outil, vérifier :
+
+- le Skill a-t-il été découvert ou invoqué ?
+- les étapes et les règles ont-elles été respectées ?
+- le format de sortie est-il correct ?
+- des informations ont-elles été inventées ou oubliées ?
+
+Corriger les instructions qui posent problème, puis refaire le test dans les deux outils avec des critères identiques.
+
+---
+
+## Exercice et livrables
+
+Créer un Skill pour une tâche déjà réalisée et fournir :
+
+1. un dossier contenant `SKILL.md` ;
+2. un exemple d'entrée et le résultat attendu ;
+3. un test documenté dans Antigravity ;
+4. le même test documenté dans GitHub Copilot pour VS Code ;
+5. une amélioration apportée après comparaison des résultats.
+
+---
+
+## Scénario commun de validation
 
 ```text
 Contexte : le dépôt contient une présentation Marp à produire.
-Objectif : créer lab-agent/prisontation.md sur le thème « Skills et agents IA ».
-Contraintes : respecter le Skill lab-adaptation, garder un unique livrable Markdown,
-utiliser les cinq premières slides imposées et déclarer le langage de chaque code fence.
-Vérification : contrôler le frontmatter, le nombre de sections, les séparateurs de slides,
-les tableaux alignés et l'absence de nom sur la slide 1.
+Objectif : créer lab-agent/prisontation.md sur les Skills et les agents IA.
+Contraintes : lire lab-adaptation, respecter les cinq premières slides et nommer les code fences.
+Vérification : contrôler le frontmatter, les sections, les tableaux et l'absence de débordement.
 Sortie : résumer les changements, les tests et les limites rencontrées.
 ```
 
-Le même scénario réduit le biais lié à la formulation de la demande.
-
----
-
-## Practical Implementation: test dans Antigravity
-
-```text
-Lis les règles du projet et le Skill lab-adaptation avant d'agir.
-Applique le scénario de test commun à lab-agent/prisontation.md.
-Commence par un plan de trois étapes, puis réalise uniquement le livrable demandé.
-À la fin, vérifie la structure Marp, les cinq premières slides et les blocs de code.
-Retourne les fichiers modifiés, les commandes de validation et les éventuelles limites.
-```
-
-**Preuve attendue :** l'agent cite le Skill utilisé et fournit une vérification reproductible.
-
----
-<!-- _class: light -->
-
-## Practical Implementation: test dans GitHub Copilot
-
-```text
-Dans VS Code, lis .github/skills/lab-adaptation/SKILL.md puis inspecte le dépôt.
-Applique exactement le scénario de test commun à lab-agent/prisontation.md.
-Ne crée pas de fichier Markdown compagnon et ne modifie pas les fichiers existants sans nécessité.
-Après l'édition, lance les vérifications disponibles et signale ce qui n'est pas exécutable localement.
-Réponds avec : fichiers modifiés, contrôles passés, contrôles non disponibles et limites.
-```
-
-**Preuve attendue :** Copilot respecte la portée, conserve les consignes Marp et explique les contrôles.
-
----
-
-## Vérifications automatisables
-
-```powershell
-$path = (Resolve-Path .\lab-agent\prisontation.md).Path
-$lab = [System.IO.File]::ReadAllText($path, [System.Text.Encoding]::UTF8)
-$fence = ([char]96).ToString() + ([char]96).ToString() + ([char]96).ToString()
-$lines = $lab -split "`r?`n"
-$openFences = @($lines | Where-Object { $_ -match "^$fence[A-Za-z]+\s*$" })
-$closeFences = @($lines | Where-Object { $_ -match "^$fence\s*$" })
-$checks = [ordered]@{
-  Frontmatter = $lab.StartsWith("---`r`nmarp: true") -or $lab.StartsWith("---`nmarp: true")
-  TitleOnly = $lab -match "# Créer et tester des Skills avec des agents IA"
-  HasPlan = $lab -match "## Lab Plan"
-  HasRequiredSections = ($lab -match "## 1\. Introduction") -and ($lab -match "## 2\. Problems Encountered") -and ($lab -match "## 3\. Solutions Implemented")
-  HasLanguageFences = ($openFences.Count -gt 0) -and ($openFences.Count -eq $closeFences.Count)
-  HasAlignedTables = -not ($lab -match "(?m)^\|[^|]+\|[^|]+\|\s*$")
-}
-$checks | ConvertTo-Json
-if ($checks.Values -contains $false) { exit 1 }
-```
-
-Le script vérifie la conformité structurelle ; la relecture humaine vérifie la pertinence pédagogique.
+Le même scénario réduit le biais lié à la formulation de la demande et rend la comparaison reproductible.
 
 ---
 <!-- _class: light -->
@@ -214,11 +233,21 @@ Le script vérifie la conformité structurelle ; la relecture humaine vérifie l
 
 | Critère | Antigravity | GitHub Copilot | Preuve attendue |
 |:---|:---:|:---:|:---|
-| Skill lu avant l'action | Préparé | Préparé | Référence explicite au fichier |
-| Portée respectée | Bloqué avant lancement | Préparé | Un seul livrable créé |
-| Architecture Marp | Validé localement | Préparé | Slides 1 à 5 conformes |
-| Code et tableaux | Validé localement | Préparé | Fences nommées et alignements présents |
-| Synthèse finale | Bloqué avant lancement | Préparé | Changements, tests et limites |
+| Skill lu avant l'action | À vérifier | À vérifier | Référence explicite au fichier |
+| Portée respectée | À vérifier | À vérifier | Un seul livrable demandé |
+| Structure Marp | À vérifier | À vérifier | Frontmatter et slides conformes |
+| Résultat produit | À vérifier | À vérifier | Format et contenu attendus |
+
+---
+<!-- _class: light -->
+
+## Matrice de validation croisée — suite
+
+| Critère | Antigravity | GitHub Copilot | Preuve attendue |
+|:---|:---:|:---:|:---|
+| Code et tableaux | À vérifier | À vérifier | Fences nommées et tableaux lisibles |
+| Tests exécutés | À vérifier | À vérifier | Commandes ou contrôles reproductibles |
+| Limites signalées | À vérifier | À vérifier | Blocages explicitement documentés |
 
 Une cellule n'est validée que lorsqu'une preuve observable est conservée.
 
@@ -227,37 +256,22 @@ Une cellule n'est validée que lorsqu'une preuve observable est conservée.
 ## Résultats du lab
 
 - **Livrable :** `lab-agent/prisontation.md`, présentation Marp autonome.
-- **Skill appliqué :** `lab-adaptation`, lu avant la rédaction et respecté dans la structure.
-- **Test local :** contrôles structurels exécutés avec succès avec PowerShell ; rendu CLI non disponible hors ligne.
-- **Test Antigravity :** installation détectée, mais lancement bloqué par l'autorisation Computer Use de la session.
-- **Test Copilot :** VS Code et l'entrée de statut Copilot sont détectés ; l'envoi du prompt n'a pas été lancé pour éviter une interaction concurrente non confirmée.
-- **Limite :** les preuves d'exécution des deux agents doivent être complétées dans leurs interfaces respectives.
+- **Skill appliqué :** `lab-adaptation`, utilisé pour la structure, les critères et la vérification.
+- **Contrôles locaux :** structure Marp, code fences, tableaux et rendu vérifiés.
+- **Antigravity :** test préparé ; le lancement dépend de l'autorisation Computer Use de la session.
+- **Copilot :** test préparé dans VS Code ; la preuve finale doit être complétée dans l'interface.
+- **Limite :** les deux résultats d'exécution doivent être conservés pour compléter la matrice.
 
 ---
 <!-- _class: light -->
-
-## Summary & Verification Matrix
-
-| Objectif | Statut | Preuve de validation |
-|:---|:---:|:---|
-| Structurer un Skill réutilisable | Validé | Skill minimal et critères observables |
-| Créer le lab Marp | Validé | `lab-agent/prisontation.md` avec frontmatter et slides imposées |
-| Préparer le test Antigravity | Validé | Prompt commun et consignes dédiées |
-| Préparer le test Copilot | Validé | Prompt VS Code et grille identique |
-
----
-<!-- _class: light -->
-
-## Summary & Verification Matrix — continued
-
-| Objectif | Statut | Preuve de validation |
-|:---|:---:|:---|
-| Tester Antigravity | Bloqué par l'environnement | Application détectée, lancement refusé |
-| Tester GitHub Copilot | À compléter | Interface détectée, prompt non envoyé |
-| Comparer les agents | À compléter | Matrice à compléter après exécution dans les deux outils |
-
----
 
 ## À retenir
 
-Un Skill utile réduit les suppositions de l'agent, cadre la portée et transforme la qualité attendue en preuves vérifiables. Le test est réellement comparable lorsque le contexte, le prompt et les critères restent identiques entre les agents.
+Un Skill efficace est **spécialisé, clair, réutilisable et vérifiable**.
+
+Créez un Skill adapté à chaque tâche réalisée, testez-le dans Antigravity et dans GitHub Copilot pour VS Code, puis améliorez-le selon les résultats.
+
+### Documentation
+
+- [Antigravity Skills](https://antigravity.google/docs/skills)
+- [Agent Skills dans VS Code](https://code.visualstudio.com/docs/agent-customization/agent-skills)
