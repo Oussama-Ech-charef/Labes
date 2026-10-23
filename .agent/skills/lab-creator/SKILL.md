@@ -1,13 +1,13 @@
 ---
 name: lab-creator
-description: Creates or updates organized educational labs with a consistent course plan: definitions, installation and quick start, first exercise, and self-study.
+description: Creates or updates focused educational labs with a clear problem, practical solution plan, justified technologies, verifiable deliverables, and a consistent course structure.
 ---
 
 # Lab Creator Skill
 
 ## Purpose
 
-Create or update one focused educational lab in the repository. A completed lab must teach a subject from definitions to a first working result and then guide the learner toward self-study.
+Create or update one focused educational lab in the repository. Each lab starts from a concrete need, states the problem separately from the work to do, chooses only relevant technologies, defines a deliverable and observable validation criteria, then teaches the subject from definitions to a first working result and self-study.
 
 ## Rules
 
@@ -19,10 +19,33 @@ Create or update one focused educational lab in the repository. A completed lab 
 6. Keep explanations concise, accurate, and suitable for students.
 7. Do not invent technical facts. Use official documentation for commands, versions, and framework behavior when those details matter.
 8. A completed lab must not leave instructional placeholders such as subject tokens, command tokens, or completion prompts.
+9. Keep the lab focused on one achievable learning objective. Do not require the entire application stack when only part of it is needed.
+
+## Lab planning template
+
+Before writing the teaching material, define the lab using these fields. Include them in the README or the most appropriate existing planning section so learners and reviewers can find them easily:
+
+1. **Need:** who needs what in the context of the project or blog?
+2. **Problem:** what is missing or not working? Describe the difficulty without prescribing its implementation.
+3. **Work to do / solution:** list the concrete steps the learner will perform to address the problem.
+4. **Technologies:** name the tools, languages, libraries, or stack parts to use, test, or evaluate, and explain why each is relevant. Add a technology only when it supports the objective.
+5. **Deliverable:** state what the learner must produce.
+6. **Validation:** define observable results or checks that demonstrate the problem is solved.
+
+Keep the distinction explicit: the **problem** describes what needs solving; the **work to do** describes the learner's implementation steps. Do not turn the problem statement into a hidden solution.
+
+### Example planning brief
+
+- **Need:** readers want to react to a blog article.
+- **Problem:** readers cannot publish a comment under an article.
+- **Work to do:** add a form, validate the input, save the comment for the correct article, and show it after submission.
+- **Technologies:** Laravel and MySQL for processing and storage; Blade and Tailwind CSS for the form. Add JavaScript only if the exercise requires browser-side interaction.
+- **Deliverable:** a working comment form and its server-side handling.
+- **Validation:** a valid comment is saved for the correct article, empty input is rejected with a clear message, and the published comment appears on the page.
 
 ## Standard course plan
 
-Every lab must follow this progression:
+Every lab must follow this progression after its planning brief:
 
 ### 1. Définitions
 
@@ -89,12 +112,14 @@ Use valid Marp front matter, one clear message per slide, balanced code fences, 
 
 1. Inspect the repository, existing labs, local rules, and the target directory.
 2. Identify the subject, learner level, language, and requested scope.
-3. Map the subject to the four parts of the standard course plan.
-4. Create or update the required lab files without duplicating existing content.
-5. Verify that the content is concrete and that no placeholders remain in a completed lab.
-6. Verify all relative links, Markdown code fences, and Marp front matter.
-7. Update the repository lab index only when the repository has one and the user asks for an index update.
-8. Summarize changed files and checks performed.
+3. Write the planning brief: need, problem, work to do, technologies with reasons, deliverable, and validation criteria.
+4. Check that the problem is not overbroad, the work is actionable, and every selected technology supports the objective.
+5. Map the subject to the four parts of the standard course plan.
+6. Create or update the required lab files without duplicating existing content; place the planning brief in the README or an established planning section.
+7. Verify that the content is concrete and that no placeholders remain in a completed lab.
+8. Verify all relative links, Markdown code fences, and Marp front matter.
+9. Update the repository lab index only when the repository has one and the user asks for an index update.
+10. Summarize changed files and checks performed.
 
 ## Important
 

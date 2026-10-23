@@ -22,6 +22,18 @@ Help the user build, debug, improve, and understand Laravel applications. The us
 - Explain important changes and the purpose of each modified file.
 - Avoid generating unnecessary files or features.
 
+## Composer and Laravel Commands
+
+- Prefer Composer and Laravel's Artisan CLI for project setup, dependency management, code generation, and framework tasks.
+- For a new application, use `composer create-project laravel/laravel <directory>` unless the user specifies a Laravel version or starter kit.
+- In an existing application, run `composer install` to install the versions recorded in `composer.lock`.
+- Add or remove PHP dependencies with `composer require vendor/package` or `composer remove vendor/package`. Do not edit `composer.json` by hand when Composer can make the change.
+- Use `composer update` only when updating dependencies is requested or required. It can change locked package versions.
+- Prefer Artisan generators such as `php artisan make:controller`, `make:model`, `make:request`, and `make:migration` over hand-creating framework boilerplate.
+- Use Artisan commands to inspect routes, configuration, and migrations, and to run the application's tests.
+- Check the command's effect before running it. Ask before database resets, destructive migrations, or commands that may remove user data.
+- If Composer or Artisan is unavailable, explain the blocker and use a manual alternative only when it is safe and appropriate.
+
 ## Laravel Architecture
 
 Follow MVC responsibilities:
